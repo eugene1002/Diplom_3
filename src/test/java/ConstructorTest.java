@@ -20,10 +20,9 @@ public class ConstructorTest {
         System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver"); // запуск в Хроме
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        /* Для запуска тестов в Яндекс.Браузере выполнить (предварительно закомментировав строку запуск в Хроме:
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver");
-        options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
-        */
+//        Для запуска тестов в Яндекс.Браузере выполнить (предварительно закомментировав строку запуск в Хроме:
+//        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver");
+//        options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
 
         driver = new ChromeDriver(options);
         driver.get("https://stellarburgers.nomoreparties.site/");
@@ -31,7 +30,11 @@ public class ConstructorTest {
     @Test
     @DisplayName("Переход к разделу Булки")
     public void successTransferToBunInConstructorTest() {
-        String actualResult = driver.findElement(bunInConstructor).getText();
+        driver.findElement(sauces).click();
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(bun));
+        driver.findElement(bun).click();
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(bunInConstructor));
+        String actualResult = driver.findElement(activeElementConstructor).getText();
         String expectedResult = "Булки";
         assertEquals(expectedResult,actualResult);
     }
@@ -41,7 +44,7 @@ public class ConstructorTest {
     public void successTransferToSaucesInConstructorTest() {
         driver.findElement(sauces).click();
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(saucesInConstructor));
-        String actualResult = driver.findElement(saucesInConstructor).getText();
+        String actualResult = driver.findElement(activeElementConstructor).getText();
         String expectedResult = "Соусы";
         assertEquals(expectedResult,actualResult);
     }
@@ -51,7 +54,7 @@ public class ConstructorTest {
     public void successTransferToFillingsInConstructorTest() {
         driver.findElement(filling).click();
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(fillingInConstructor));
-        String actualResult = driver.findElement(fillingInConstructor).getText();
+        String actualResult = driver.findElement(activeElementConstructor).getText();
         String expectedResult = "Начинки";
         assertEquals(expectedResult,actualResult);
     }

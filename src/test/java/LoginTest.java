@@ -26,10 +26,9 @@ public class LoginTest {
         System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver"); // запуск в Хроме
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // Убрать, если необходимо видеть прогон автотестов в браузере.
-        /* Для запуска тестов в Яндекс.Браузере выполнить (предварительно закомментировав строку запуск в Хроме:
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver");
-        options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
-        */
+//        Для запуска тестов в Яндекс.Браузере выполнить (предварительно закомментировав строку запуск в Хроме:
+//        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver");
+//        options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
 
         driver = new ChromeDriver(options);
         driver.get("https://stellarburgers.nomoreparties.site/");
@@ -83,6 +82,7 @@ public class LoginTest {
         driver.findElement(forgotPasswordLink).click();
         driver.findElement(signInlink).click();
         authPage.loginFromMainPage(createUser.getEmail(), createUser.getPassword());
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(buttonMakeOrder));
         String actualResult = driver.findElement(buttonMakeOrder).getText();
         String expectedResult = "Оформить заказ";
         assertEquals(expectedResult,actualResult);

@@ -14,4 +14,5 @@ public class LocatorsMainPage {
     public static final By saucesInConstructor = By.xpath("//*[@id=\"root\"]/div/main/section[1]/div[2]/h2[2]");
     public static final By filling = By.xpath("//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]");
     public static final By fillingInConstructor = By.xpath("//*[@id=\"root\"]/div/main/section[1]/div[2]/h2[3]");
+    public static final By activeElementConstructor = By.xpath("//div[contains(@class, 'tab_tab_type_current')]/span[contains(@class, 'text_type_main-default')]");
 }

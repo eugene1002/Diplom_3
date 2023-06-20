@@ -12,6 +12,7 @@ import java.time.Duration;
 
 import static PageObject.LocatorsAuthPage.buttonSignIn;
 import static PageObject.LocatorsRegistrationPage.textIncorrectPassword;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertEquals;
 
 public class RegistrationTest {
@@ -38,12 +39,17 @@ public class RegistrationTest {
         String name = "Ichigo";
         String email = "kurasaki_ichigo2027@yandex.ru";
         String password = "123456!password";
-        objRegisterPage.register(name, email, password);
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(buttonSignIn));
-        String actualResult = driver.findElement(buttonSignIn).getText();
-        String expectedResult = "Войти";
-        assertEquals(expectedResult,actualResult);
-        UserController.apiDeleteUser(email, password);
+        LoginUser loginUser = new LoginUser(email, password);
+        if (UserController.executeLogin(loginUser).getStatusCode() == SC_OK) {
+            UserController.executeDelete(loginUser);
+        } else {
+            objRegisterPage.register(name, email, password);
+            new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(buttonSignIn));
+            String actualResult = driver.findElement(buttonSignIn).getText();
+            String expectedResult = "Войти";
+            assertEquals(expectedResult, actualResult);
+            UserController.apiDeleteUser(email, password);
+        }
     }
 
     @Test
