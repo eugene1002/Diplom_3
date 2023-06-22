@@ -42,14 +42,13 @@ public class RegistrationTest {
         LoginUser loginUser = new LoginUser(email, password);
         if (UserController.executeLogin(loginUser).getStatusCode() == SC_OK) {
             UserController.executeDelete(loginUser);
-        } else {
+        }
             objRegisterPage.register(name, email, password);
             new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(buttonSignIn));
             String actualResult = driver.findElement(buttonSignIn).getText();
             String expectedResult = "Войти";
             assertEquals(expectedResult, actualResult);
             UserController.apiDeleteUser(email, password);
-        }
     }
 
     @Test
