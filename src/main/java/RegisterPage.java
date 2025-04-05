@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 
-import static PageObject.LocatorsMainPage.buttonPersonalCabinet;
+import static PageObject.LocatorsAuthPage.registerLink;
+import static PageObject.LocatorsMainPage.personalCabinetButton;
 import static PageObject.LocatorsRegistrationPage.*;
 
 public class RegisterPage {
@@ -11,30 +12,32 @@ public class RegisterPage {
     }
 
     public void clickOnPersonalCabinetButton() {
-        driver.findElement(buttonPersonalCabinet).click();
+        driver.findElement(personalCabinetButton).click();
     }
-    public void clickOnRegisterButton() {
-        driver.findElement(buttonRegister1).click();
+
+    public void clickOnRegisterLink() {
+        driver.findElement(registerLink).click();
     }
+
     public void clickOnFinalRegisterButton() {
-        driver.findElement(buttonRegister2).click();
+        driver.findElement(registerButton).click();
     }
 
     public void setName(String name) {
-        driver.findElement(fieldName).sendKeys(name);
+        driver.findElement(nameField).sendKeys(name);
     }
 
     public void setEmail(String email) {
-        driver.findElement(fieldEmail).sendKeys(email);
+        driver.findElement(emailField).sendKeys(email);
     }
 
     public void setPassword(String password) {
-        driver.findElement(fieldPassword).sendKeys(password);
+        driver.findElement(passwordField).sendKeys(password);
     }
 
     public void register(String name, String email, String password) {
         clickOnPersonalCabinetButton();
-        clickOnRegisterButton();
+        clickOnRegisterLink();
         setName(name);
         setEmail(email);
         setPassword(password);
