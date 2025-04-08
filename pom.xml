@@ -28,9 +28,9 @@
             <version>17.0.2</version>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.9.0</version>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>6.17.0</version>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -73,6 +73,12 @@
             <artifactId>webdrivermanager</artifactId>
             <version>6.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- последняя версия на апрель 2025 -->
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,7 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.2.5</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
@@ -101,12 +107,12 @@
                             <value>io.qameta.allure.junit4.AllureJunit4</value>
                         </property>
                     </properties>
-                    <systemProperties>
-                        <property>
-                            <name>allure.results.directory</name>
-                            <value>${project.build.directory}/allure-results</value>
-                        </property>
-                    </systemProperties>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <browser>${browser}</browser>
+                        <mode>${mode}</mode>
+                        <baseUrl>${baseUrl}</baseUrl>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -116,6 +122,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
