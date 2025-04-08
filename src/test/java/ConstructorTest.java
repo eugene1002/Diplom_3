@@ -12,6 +12,7 @@ public class ConstructorTest extends BaseTest {
     @Test
     @DisplayName("Переход к разделу Булки")
     public void successTransferToBunInConstructorTest() {
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(saucesTab));
         driver.findElement(saucesTab).click();
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(bunsTab));
         driver.findElement(bunsTab).click();

@@ -24,16 +24,22 @@ public class BaseTest {
     protected String userPassword = faker.internet().password();
 
     /*
+
     Здесь нужно выбрать браузер, на котором будут запускаться тесты.
     В метод getWebDriver() в качестве аргумента передать один из вариантов ниже:
-        - chrome - для запуска в бразуере Google Chrome;
-        - yandex - для запуска в бразуере Yandex Browser;
-        - firefox - для запуска в бразуере Mozilla Firefox.
+        - chrome - для запуска в браузере Google Chrome;
+        - yandex - для запуска в браузере Yandex Browser;
+        - firefox - для запуска в браузере Mozilla Firefox.
+
+   Также есть возможность запуска в режиме headless. Для этого в метод getWebDriver()
+   надо передать второй параметр со значением --headless.
+
      */
+
     @Before
     @Step("Инициализация драйвера браузера")
     public void initBrowser() {
-        driver = Browser.getWebDriver("yandex");
+        driver = Browser.getWebDriver("chrome");
         driver.manage().window().maximize();
         driver.get(URL);
         RestAssured.baseURI = URL;
