@@ -1,59 +1,66 @@
-# 🧪 Stellar Burgers — UI & API Тесты
+# 🧪 Stellar Burgers Tests
 
-Автоматизированные тесты для веб-приложения [Stellar Burgers](https://stellarburgers.nomoreparties.site/), написанные с использованием:
+![GitHub Repo size](https://img.shields.io/github/repo-size/eugene1002/yandex_burger)
+![GitHub last commit](https://img.shields.io/github/last-commit/eugene1002/yandex_burger)
+![GitHub branch](https://img.shields.io/badge/branch-master-blue)
 
-- 🧷 **Selenide** — для UI-тестов  
-- 🔗 **Rest Assured** — для API  
-- 📊 **Allure** — для красивых отчётов  
-- ⚙️ **JUnit 4**, **Maven**, **Faker**, **Lombok**
+Автоматизированные UI + API тесты для [Stellar Burgers](https://stellarburgers.nomoreparties.site/)
 
 ---
 
-## 📁 Структура проекта
+## 🔧 Стек технологий
 
-```
-src
-├── main
-│   ├── java
-│   │   ├── locators/                // Локаторы (XPath)
-│   │   ├── models/                  // DTO-модели для API
-│   │   ├── pages/                   // Page Object страницы
-│   │   ├── controllers/             // API контроллеры
-│   │   ├── utils/                   // Конфиги, браузер, WebDriverProvider
-├── test
-│   └── java
-│       └── ui/                      // UI тесты (JUnit)
-resources
-├── config.properties               // Конфигурация запуска
-└── drivers/
-    └── chromedriver-135            // Драйвер для Yandex Browser
+- 🧷 **Selenide** — UI тестирование
+- 🔗 **Rest Assured** — API тестирование
+- 📊 **Allure** — отчёты, шаги и вложения
+- ⚙️ **JUnit 4**, **Maven**, **Lombok**, **Faker**
+
+---
+
+## 🚀 Запуск
+
+```bash
+mvn clean test
 ```
 
----
+> Используется конфигурация из `src/test/resources/config.properties`
 
-## ⚙️ Используемые технологии
+Переопределение параметров:
 
-| Технология         | Назначение                   |
-|--------------------|------------------------------|
-| **Selenide**       | Тестирование UI              |
-| **Rest Assured**   | Тестирование API             |
-| **JUnit 4**        | Фреймворк                     |
-| **Allure**         | Отчёты и шаги                |
-| **Maven**          | Сборка и зависимости         |
-| **DataFaker**      | Генерация случайных данных   |
-| **Lombok**         | Упрощение моделей            |
+```bash
+mvn clean test -Dbrowser=chrome -DisHeadless=false -DbaseUrl=https://stellarburgers.nomoreparties.site/
+```
 
 ---
 
-## 🔧 Конфигурация (`config.properties`)
+## 📊 Отчёт Allure
+
+```bash
+allure serve target/allure-results
+```
+
+---
+
+## ✅ Покрытие
+
+- [x] Авторизация разными способами
+- [x] Регистрация нового пользователя
+- [x] Выход из аккаунта
+- [x] Проверка конструктора бургеров
+- [x] UI + API интеграция
+- [x] Скриншоты при ошибках
+- [x] Поддержка Chrome, Firefox и Yandex
+
+---
+
+## ⚙️ Конфигурация (config.properties)
 
 ```properties
 browser=chrome               # chrome / firefox / yandex
-isHeadless=true              # true / false
+isHeadless=false             # true / false
 baseUrl=https://stellarburgers.nomoreparties.site/
-defaultWait=3                # Время ожидания в секундах
+defaultWait=3                # seconds
 ```
-
 > 💡 Для **Yandex Browser** используется кастомный WebDriverProvider `YandexWebDriverProvider.java`, который запускает браузер с локальным `chromedriver`.
 
 ---
@@ -84,8 +91,8 @@ mvn test -Dtest=LoginTest
 
 - 🧠 При `isHeadless=false`, окно браузера автоматически **разворачивается на весь экран**
 - 🧭 `browser=yandex` использует:
-  - бинарник `Yandex`
-  - драйвер `chromedriver-135` из `src/test/resources/drivers/`
+    - бинарник `Yandex`
+    - драйвер `chromedriver-132` из `src/test/resources/drivers/`
 
 ---
 
@@ -113,10 +120,10 @@ allure serve target/allure-results
 
 ## 🧠 Возможности для расширения
 
-- 🔐 Тесты восстановления пароля  
-- 📩 Интеграция с Email / Telegram  
-- 🧱 Разделение `BaseApiTest` и `BaseUiTest`  
-- ⚙️ CI (GitHub Actions, GitLab CI)  
+- 🔐 Тесты восстановления пароля
+- 📩 Интеграция с Email / Telegram
+- 🧱 Разделение `BaseApiTest` и `BaseUiTest`
+- ⚙️ CI (GitHub Actions, GitLab CI)
 - 🧪 Параллельный запуск тестов
 
 ---
