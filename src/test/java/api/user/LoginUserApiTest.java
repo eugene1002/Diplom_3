@@ -15,7 +15,7 @@ import utils.TestDataFactory;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
-@DisplayName("Авторизация пользователя через API")
+@DisplayName("[API] Авторизация пользователя")
 public class LoginUserApiTest extends BaseApiTest {
 
     private CreateUser createUser;

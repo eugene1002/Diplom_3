@@ -14,34 +14,37 @@ import utils.TestDataFactory;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.hamcrest.Matchers.equalTo;
 
-@DisplayName("Создание пользователя через API (негативные сценарии)")
+@DisplayName("[API] Создание пользователя (негативные сценарии)")
 @RunWith(Parameterized.class)
 public class CreateUserNegativeApiTest extends BaseApiTest {
 
     private final CreateUser invalidUser;
+    private final String missingField;
 
-    public CreateUserNegativeApiTest(CreateUser invalidUser) {
+    public CreateUserNegativeApiTest(CreateUser invalidUser, String missingField) {
         this.invalidUser = invalidUser;
+        this.missingField = missingField;
     }
 
-    @Parameterized.Parameters(name = "Негативный кейс: {0}")
+
+    @Parameterized.Parameters(name = "Отсутствует поле: {1}")
     public static Object[][] invalidUsers() {
         return new Object[][]{
-                {TestDataFactory.getUserWithoutEmail()},
-                {TestDataFactory.getUserWithoutPassword()},
-                {TestDataFactory.getUserWithoutName()}
+                {TestDataFactory.getUserWithoutEmail(), "email"},
+                {TestDataFactory.getUserWithoutPassword(), "password"},
+                {TestDataFactory.getUserWithoutName(), "name"}
         };
     }
 
     @Test
-    @DisplayName("Ошибка при создании пользователя без обязательного поля")
+    @DisplayName("Негативный сценарий: создание пользователя без поля")
     public void shouldNotCreateUserWithoutRequiredField() {
         Response response = UserController.createUser(invalidUser);
-        assertMissingFieldError(response);
+        assertMissingFieldError(response, missingField);
     }
 
-    @Step("Проверка ошибки: обязательные поля не переданы")
-    private void assertMissingFieldError(Response response) {
+    @Step("Проверка ошибки: отсутствует поле {missingField}")
+    private void assertMissingFieldError(Response response, String missingField) {
         response.then().assertThat()
                 .statusCode(SC_FORBIDDEN)
                 .body("success", equalTo(false))

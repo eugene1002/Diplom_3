@@ -14,7 +14,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.hamcrest.Matchers.equalTo;
 
-@DisplayName("Получение данных пользователя через API")
+@DisplayName("[API] Получение данных пользователя")
 public class GetUserDataApiTest extends BaseApiTest {
 
     private CreateUser createUser;

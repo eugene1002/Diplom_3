@@ -14,7 +14,7 @@ import utils.TestDataFactory;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-@DisplayName("Выход из системы")
+@DisplayName("[API] Выход из системы")
 public class LogoutUserApiTest extends BaseApiTest {
 
     private CreateUser createUser;

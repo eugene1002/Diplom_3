@@ -16,7 +16,7 @@ import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
 
-@DisplayName("Создание пользователя через API (позитивные сценарии)")
+@DisplayName("[API] Создание пользователя (позитивные сценарии)")
 public class CreateUserApiTest extends BaseApiTest {
 
     private CreateUser createUser;
