@@ -21,7 +21,6 @@ public class CreateUserApiTest extends BaseApiTest {
 
     private CreateUser createUser;
     private LoginUser loginUser;
-    private String token;
 
     @Before
     public void setUp() {

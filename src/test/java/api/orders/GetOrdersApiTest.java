@@ -20,7 +20,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.hamcrest.Matchers.*;
 
-@DisplayName("Получение заказов через API")
+@DisplayName("[API] Получение заказов")
 public class GetOrdersApiTest extends BaseApiTest {
 
     private CreateUser createUser;

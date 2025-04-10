@@ -16,6 +16,8 @@ public class UserController {
 
     private static final String CREATE_USER_ENDPOINT = "/api/auth/register";
     private static final String LOGIN_USER_ENDPOINT = "/api/auth/login";
+    private static final String REFRESH_TOKEN_USER_ENDPOINT = "/api/auth/token";
+    private static final String RESET_PASSWORD_USER_ENDPOINT = "/api/password-reset";
     private static final String LOGOUT_USER_ENDPOINT = "/api/auth/logout";
     private static final String DELETE_USER_ENDPOINT = "/api/auth/user";
     private static final String GET_OR_CHANGE_USER_ENDPOINT = "/api/auth/user";
@@ -25,7 +27,7 @@ public class UserController {
                 .header("Content-Type", "application/json");
     }
 
-    @Step("Создание пользователя через API")
+    @Step("Создание пользователя")
     public static Response createUser(CreateUser createUser) {
         return spec()
                 .body(createUser)
@@ -33,7 +35,7 @@ public class UserController {
                 .post(CREATE_USER_ENDPOINT);
     }
 
-    @Step("Авторизация пользователя через API")
+    @Step("Авторизация пользователя")
     public static Response loginUser(LoginUser loginUser) {
         return spec()
                 .body(loginUser)
@@ -54,7 +56,33 @@ public class UserController {
         return response.jsonPath().getString("refreshToken");
     }
 
-    @Step("Выход пользователя из системы")
+    @Step("Обновление токена пользователя (email: {loginUser.email})")
+    public static Response refreshToken(LoginUser loginUser) {
+        String refreshToken = getRefreshToken(loginUser);
+
+        Map<String, String> body = new HashMap<>();
+        body.put("token", refreshToken);
+
+        return spec()
+                .auth().oauth2(getAccessToken(loginUser))
+                .body(body)
+                .when()
+                .post(REFRESH_TOKEN_USER_ENDPOINT);
+    }
+
+    @Step("Сброс пароля пользователя (email: {loginUser.email})")
+    public static Response resetPassword(LoginUser loginUser) {
+
+        Map<String, String> body = new HashMap<>();
+        body.put("email", loginUser.getEmail());
+
+        return spec()
+                .body(body)
+                .when()
+                .post(RESET_PASSWORD_USER_ENDPOINT);
+    }
+
+    @Step("Выход из системы пользователя (email: {loginUser.email})")
     public static Response logoutUser(LoginUser loginUser) {
         String refreshToken = getRefreshToken(loginUser);
 
@@ -67,7 +95,6 @@ public class UserController {
                 .when()
                 .post(LOGOUT_USER_ENDPOINT);
     }
-
 
     @Step("Удаление пользователя по логину")
     public static Response deleteUser(LoginUser loginUser) {

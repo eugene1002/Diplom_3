@@ -14,7 +14,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-@DisplayName("Получение ингредиентов через API")
+@DisplayName("[API] Получение ингредиентов")
 public class GetIngredientsApiTest extends BaseApiTest {
 
     @Test

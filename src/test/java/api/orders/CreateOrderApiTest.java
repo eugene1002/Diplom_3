@@ -17,7 +17,7 @@ import utils.TestDataFactory;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
-@DisplayName("Создание заказа через API")
+@DisplayName("[API] Создание заказа")
 public class CreateOrderApiTest extends BaseApiTest {
 
     private CreateUser createUser;
