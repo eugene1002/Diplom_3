@@ -14,7 +14,7 @@ import static locators.LocatorsMainPage.MAKE_BURGER_TITLE;
 import static locators.LocatorsMainPage.CONSTRUCTOR_BUTTON;
 import static org.junit.Assert.assertEquals;
 
-@DisplayName("Личный кабинет пользователя")
+@DisplayName("[UI] Личный кабинет пользователя")
 public class PersonalCabinetTest extends BaseUiTest {
 
     private final PersonalCabinetPage cabinetPage = new PersonalCabinetPage();
