@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-@DisplayName("Переход по разделам конструктора")
+@DisplayName("[UI] Переход по разделам конструктора")
 public class ConstructorTest extends BaseUiTest {
 
     @Test

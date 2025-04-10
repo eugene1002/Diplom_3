@@ -13,7 +13,7 @@ import static locators.LocatorsMainPage.PERSONAL_CABINET_BUTTON;
 import static locators.LocatorsMainPage.SIGN_IN_ACCOUNT_BUTTON;
 import static org.junit.Assert.assertEquals;
 
-@DisplayName("Авторизация пользователя")
+@DisplayName("[UI] Авторизация пользователя")
 public class LoginTest extends BaseUiTest {
 
     private final RegistrationPage registrationPage = new RegistrationPage();

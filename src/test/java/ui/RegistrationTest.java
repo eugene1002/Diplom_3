@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static com.codeborne.selenide.Selenide.$x;
 import static locators.LocatorsRegistrationPage.INCORRECT_PASSWORD_TEXT;
 
-@DisplayName("Регистрация пользователя")
+@DisplayName("[UI] Регистрация пользователя")
 public class RegistrationTest extends BaseUiTest {
 
     private final RegistrationPage registrationPage = new RegistrationPage();
@@ -25,12 +25,12 @@ public class RegistrationTest extends BaseUiTest {
         LoginUser loginUser = new LoginUser(userEmail, userPassword);
 
         if (UserController.loginUser(loginUser).getStatusCode() == SC_OK) {
-            UserController.deleteUser(loginUser);
+            UserController.deleteUser(UserController.getAccessToken(loginUser));
         }
 
         registrationPage.register(userName, userEmail, userPassword);
         assertLoginButtonVisibleAfterRegistration();
-        UserController.deleteUser(loginUser);
+        UserController.deleteUser(UserController.getAccessToken(loginUser));
     }
 
     @Test
